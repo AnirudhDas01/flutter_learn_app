@@ -49,31 +49,68 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String showDate = "Select Date";
   final f = DateFormat('yyyy/MM/dd hh:mm');
+
+  final List<MaterialAccentColor> colorsArray = [
+    // Purples & Pinks
+    Colors.purpleAccent,
+    Colors.deepPurpleAccent,
+    Colors.pinkAccent,
+
+    // Blues
+    Colors.indigoAccent,
+    Colors.blueAccent,
+    Colors.lightBlueAccent,
+    Colors.cyanAccent,
+
+    // Greens
+    Colors.greenAccent,
+    Colors.lightGreenAccent,
+    Colors.tealAccent,
+
+    // Yellows & Oranges
+    Colors.yellowAccent,
+    Colors.amberAccent,
+    Colors.orangeAccent,
+    Colors.deepOrangeAccent,
+
+    // Reds
+    Colors.redAccent,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Flutter Date Picker")),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 2,
-            children: [
-              Text(showDate, style: TextStyle(fontSize: 22)),
-              ElevatedButton(
-                onPressed: () async {
-                  TimeOfDay? pickedTime = await showTimePicker(
-                    context: context,
-                    initialTime: TimeOfDay.now(),
-                    initialEntryMode: TimePickerEntryMode.input,
-                  );
-                  showDate = '${pickedTime?.hour}:${pickedTime?.minute}';
-                  setState(() {});
-                },
-                child: Text("Show"),
-              ),
-            ],
+        // child: GridView.count(
+        //   crossAxisCount: 3,
+        //   mainAxisSpacing: 2,
+        //   crossAxisSpacing: 2,
+        //   children: [
+        //     Container(decoration: BoxDecoration(color: Colors.blue)),
+        //     Container(decoration: BoxDecoration(color: Colors.blue)),
+        //     Container(decoration: BoxDecoration(color: Colors.blue)),
+        //     Container(decoration: BoxDecoration(color: Colors.blue)),
+        //     Container(decoration: BoxDecoration(color: Colors.blue)),
+        //     Container(decoration: BoxDecoration(color: Colors.blue)),
+        //     Container(decoration: BoxDecoration(color: Colors.blue)),
+        //     Container(decoration: BoxDecoration(color: Colors.blue)),
+        //     Container(decoration: BoxDecoration(color: Colors.blue)),
+        //     Container(decoration: BoxDecoration(color: Colors.blue)),
+        //   ],
+        // ),
+        child: GridView.builder(
+          itemBuilder: (context, index) {
+            return Container(
+              decoration: BoxDecoration(color: colorsArray[index]),
+            );
+          },
+          itemCount: colorsArray.length,
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200,
+            crossAxisSpacing: 11,
+            mainAxisSpacing: 11,
           ),
         ),
       ),
