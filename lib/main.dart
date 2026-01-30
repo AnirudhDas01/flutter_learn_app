@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:test_app/ui_helper/util.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,103 +47,34 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool isEnabled = true;
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
-  bool togglePassword = true;
-  Map<String, String> data = {};
-  void printVal() {
-    if (emailController.text.trim().isNotEmpty &&
-        passwordController.text.trim().isNotEmpty) {
-      data['email'] = emailController.text;
-      data['password'] = passwordController.text;
-      String dataToJson = jsonEncode(data);
-      print(dataToJson);
-    }
-  }
-
+  String showDate = "Select Date";
+  final f = DateFormat('yyyy/MM/dd hh:mm');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Flutter User Input")),
+      appBar: AppBar(title: Text("Flutter Date Picker")),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          spacing: 10,
-          children: [
-            TextField(
-              enabled: isEnabled,
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: isEnabled
-                      ? BorderRadius.circular(50)
-                      : BorderRadius.circular(15),
-                  borderSide: isEnabled
-                      ? BorderSide(color: Colors.red)
-                      : BorderSide(color: Colors.grey),
-                ),
-
-                disabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                prefixIcon: Icon(Icons.email),
-                labelText: "Enter Email",
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 2,
+            children: [
+              Text(showDate, style: TextStyle(fontSize: 22)),
+              ElevatedButton(
+                onPressed: () async {
+                  TimeOfDay? pickedTime = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.now(),
+                    initialEntryMode: TimePickerEntryMode.input,
+                  );
+                  showDate = '${pickedTime?.hour}:${pickedTime?.minute}';
+                  setState(() {});
+                },
+                child: Text("Show"),
               ),
-              controller: emailController,
-            ),
-            TextField(
-              enabled: isEnabled,
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: isEnabled
-                      ? BorderRadius.circular(50)
-                      : BorderRadius.circular(15),
-                  borderSide: isEnabled
-                      ? BorderSide(color: Colors.red)
-                      : BorderSide(color: Colors.grey),
-                ),
-
-                disabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    togglePassword = !togglePassword;
-                    setState(() {});
-                  },
-                  icon: Icon(Icons.remove_red_eye),
-                ),
-                labelText: "Enter Password",
-              ),
-              controller: passwordController,
-              obscureText: togglePassword,
-            ),
-            SizedBox(
-              width: 200,
-              height: 40,
-              child: ElevatedButton(
-                onPressed: printVal,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(3.0),
-                    side: BorderSide(color: Colors.blueAccent),
-                  ),
-                ),
-
-                child: Text("Submit"),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
