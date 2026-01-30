@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,72 +46,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String showDate = "Select Date";
-  final f = DateFormat('yyyy/MM/dd hh:mm');
-
-  final List<MaterialAccentColor> colorsArray = [
-    // Purples & Pinks
-    Colors.purpleAccent,
-    Colors.deepPurpleAccent,
-    Colors.pinkAccent,
-
-    // Blues
-    Colors.indigoAccent,
-    Colors.blueAccent,
-    Colors.lightBlueAccent,
-    Colors.cyanAccent,
-
-    // Greens
-    Colors.greenAccent,
-    Colors.lightGreenAccent,
-    Colors.tealAccent,
-
-    // Yellows & Oranges
-    Colors.yellowAccent,
-    Colors.amberAccent,
-    Colors.orangeAccent,
-    Colors.deepOrangeAccent,
-
-    // Reds
-    Colors.redAccent,
-  ];
+  void setCallBack() {
+    print("The callback method is working");
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Flutter Date Picker")),
+      appBar: AppBar(title: Text("Flutter CallBacks")),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        // child: GridView.count(
-        //   crossAxisCount: 3,
-        //   mainAxisSpacing: 2,
-        //   crossAxisSpacing: 2,
-        //   children: [
-        //     Container(decoration: BoxDecoration(color: Colors.blue)),
-        //     Container(decoration: BoxDecoration(color: Colors.blue)),
-        //     Container(decoration: BoxDecoration(color: Colors.blue)),
-        //     Container(decoration: BoxDecoration(color: Colors.blue)),
-        //     Container(decoration: BoxDecoration(color: Colors.blue)),
-        //     Container(decoration: BoxDecoration(color: Colors.blue)),
-        //     Container(decoration: BoxDecoration(color: Colors.blue)),
-        //     Container(decoration: BoxDecoration(color: Colors.blue)),
-        //     Container(decoration: BoxDecoration(color: Colors.blue)),
-        //     Container(decoration: BoxDecoration(color: Colors.blue)),
-        //   ],
-        // ),
-        child: GridView.builder(
-          itemBuilder: (context, index) {
-            return Container(
-              decoration: BoxDecoration(color: colorsArray[index]),
-            );
-          },
-          itemCount: colorsArray.length,
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 200,
-            crossAxisSpacing: 11,
-            mainAxisSpacing: 11,
-          ),
-        ),
+        child: ElevatedButton(onPressed: setCallBack, child: Text("Check")),
       ),
     );
   }
