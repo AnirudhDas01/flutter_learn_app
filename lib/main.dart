@@ -46,17 +46,26 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void setCallBack() {
-    print("The callback method is working");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Flutter CallBacks")),
+      appBar: AppBar(title: Text("Flutter Stack")),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ElevatedButton(onPressed: setCallBack, child: Text("Check")),
+        child: Stack(
+          children: [
+            Container(width: 200, height: 200, color: Colors.amber),
+            Positioned(
+              top: 20,
+              left: 20,
+              child: Container(
+                width: 200,
+                height: 200,
+                color: Colors.amberAccent,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
