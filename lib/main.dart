@@ -52,19 +52,36 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(title: Text("Flutter Stack")),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Stack(
-          children: [
-            Container(width: 200, height: 200, color: Colors.amber),
-            Positioned(
-              top: 20,
-              left: 20,
-              child: Container(
-                width: 200,
-                height: 200,
-                color: Colors.amberAccent,
-              ),
-            ),
-          ],
+        child: SizedBox(
+          width: double.infinity,
+          height: double.infinity,
+          child: Wrap(
+            alignment: WrapAlignment.spaceAround,
+            spacing: 11,
+            runSpacing: 11,
+            children: [
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+              Container(width: 100, height: 100, color: Colors.blue),
+            ],
+          ),
         ),
       ),
     );
