@@ -49,38 +49,29 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Flutter Stack")),
+      appBar: AppBar(title: Text("Flutter Rich Text")),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: Wrap(
-            alignment: WrapAlignment.spaceAround,
-            spacing: 11,
-            runSpacing: 11,
-            children: [
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-              Container(width: 100, height: 100, color: Colors.blue),
-            ],
+        child: Center(
+          child: RichText(
+            text: TextSpan(
+              style: TextStyle(
+                fontSize: 22,
+                color: Colors.blueGrey,
+                fontWeight: FontWeight.bold,
+              ),
+              children: <TextSpan>[
+                TextSpan(text: "Hello"),
+                TextSpan(
+                  text: " World!",
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontSize: 30,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
