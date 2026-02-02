@@ -1,4 +1,7 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:test_app/widgets/green_submit_button.dart';
+import 'package:test_app/widgets/white_text_field.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,42 +49,105 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var cntWeight = TextEditingController();
+  var cntHeight = TextEditingController();
+  var bmiStatus = '';
+  var bmi = 0.00;
+  Color bmiColor = Colors.white;
+  void calculateBmi() {
+    setState(() {
+      bmi =
+          (double.parse(cntWeight.text)) / pow(double.parse(cntHeight.text), 2);
+      if (bmi <= 18.5) {
+        bmiStatus = 'Under Weight';
+        bmiColor = Colors.yellowAccent;
+      } else if (bmi > 18.5 && bmi <= 24.9) {
+        bmiStatus = 'Healty';
+        bmiColor = Colors.greenAccent;
+      } else if (bmi > 25 && bmi <= 29.9) {
+        bmiStatus = 'Overweight';
+        bmiColor = Colors.orangeAccent;
+      } else if (bmi > 30.0) {
+        bmiStatus = 'Obese';
+        bmiColor = Colors.redAccent;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Flutter Rich Text")),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(color: Colors.blueGrey),
+      backgroundColor: Colors.black87,
+      appBar: AppBar(title: Text("Flutter BMI Calculator")),
+      body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Stack(
-            children: [
-              Container(
-                height: 100,
-                width: 100,
-                color: const Color.fromARGB(134, 255, 82, 82),
+          padding: const EdgeInsets.all(10.0),
+          child: SizedBox(
+            height: 400,
+            width: double.infinity,
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 63, 75, 82),
+                borderRadius: BorderRadius.circular(12),
               ),
-              Positioned(
-                top: 50,
-                left: 50,
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  color: const Color.fromARGB(129, 223, 64, 251),
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                spacing: 8,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsGeometry.all(15),
+                    child: WhiteTextField(
+                      hintText: 'Enter Weight',
+                      inpController: cntWeight,
+                      prefixText: "Kgs. ",
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsGeometry.all(15),
+                    child: WhiteTextField(
+                      hintText: 'Enter Height',
+                      inpController: cntHeight,
+                      prefixText: 'Mts. ',
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: SizedBox(
+                      width: 140,
+                      height: 45,
+                      child: GreenSubmitButton(
+                        calculateBmi: calculateBmi,
+                        displayText: 'Calculate',
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        Text(
+                          bmiStatus,
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: bmiColor,
+                          ),
+                        ),
+                        Text(
+                          bmi.toStringAsFixed(2),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              Positioned(
-                top: 100,
-                left: 100,
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  color: const Color.fromARGB(94, 68, 137, 255),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
