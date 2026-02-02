@@ -50,28 +50,38 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Flutter Rich Text")),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: RichText(
-            text: TextSpan(
-              style: TextStyle(
-                fontSize: 22,
-                color: Colors.blueGrey,
-                fontWeight: FontWeight.bold,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(color: Colors.blueGrey),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Stack(
+            children: [
+              Container(
+                height: 100,
+                width: 100,
+                color: const Color.fromARGB(134, 255, 82, 82),
               ),
-              children: <TextSpan>[
-                TextSpan(text: "Hello"),
-                TextSpan(
-                  text: " World!",
-                  style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontSize: 30,
-                    fontStyle: FontStyle.italic,
-                  ),
+              Positioned(
+                top: 50,
+                left: 50,
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  color: const Color.fromARGB(129, 223, 64, 251),
                 ),
-              ],
-            ),
+              ),
+              Positioned(
+                top: 100,
+                left: 100,
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  color: const Color.fromARGB(94, 68, 137, 255),
+                ),
+              ),
+            ],
           ),
         ),
       ),
